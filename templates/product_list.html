@@ -52,7 +52,7 @@
                 <ul class="product-div">
                     {% for item in products %}
                         {% if item['Design'] not in unique_designs %}
-                            <a href="{{ url_for('item_render', design=item['Design']) }}" class="product-link">
+                            <a href="{{ url_for('product_render', design=item['Design']) }}" class="product-link">
                                 <div class="each-product">
                                     <div class="cashtop">
                                         <p>{{ item['Design'] }}</p>
