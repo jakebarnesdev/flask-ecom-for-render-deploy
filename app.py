@@ -6,10 +6,20 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
 from helpers import apology, usd
+db = SQL("sqlite:///database.db")
 
 app = Flask(__name__)
-db = SQL("sqlite:///database.db")
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+SESSION_TYPE = "redis"
+PERMANENT_SESSION_LIFETIME = 1800
+
+app.config.update(SECRET_KEY=os.urandom(24))
+
+app.config.from_object(__name__)
+Session(app)
+
+if __name__ == "__main__":
+    with app.test_request_context("/"):
+        session["key"] = "value"
 
 app.jinja_env.filters["usd"] = usd
 
