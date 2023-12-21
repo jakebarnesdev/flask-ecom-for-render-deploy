@@ -142,7 +142,7 @@ def checkout():
 
 @app.route('/basket')
 def basket():
-    session['return_page'] = '/basket'
+    # session['return_page'] = '/basket'
     # check if logged in by checking session
     if 'user_id' not in session:
         # redirect to the login page
@@ -267,7 +267,7 @@ def product_render(design):
 @app.route('/product_list', methods=['GET', 'POST'])
 def product_list():
     # store page in session
-    session['return_page'] = '/product_list'
+    # session['return_page'] = '/product_list'
 
     # query for every design
     products = db.execute("SELECT * FROM stock WHERE Design IS NOT NULL")
