@@ -73,7 +73,7 @@
                                     </div>
                                     <p>${{ item['Price'] | usd}}</p>
                                 </div>
-                                {% set _ = unique_designs.append(product['Design']) %}
+                                {% set _ = unique_designs.append(item['Design']) %}
                             </a>
                         {% endif %}
                     {% endfor %}
