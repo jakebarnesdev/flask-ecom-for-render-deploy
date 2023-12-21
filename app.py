@@ -9,7 +9,6 @@ from helpers import apology, usd
 db = SQL("sqlite:///database.db")
 
 app = Flask(__name__)
-SESSION_TYPE = "redis"
 PERMANENT_SESSION_LIFETIME = 1800
 
 app.config.update(SECRET_KEY=os.urandom(24))
