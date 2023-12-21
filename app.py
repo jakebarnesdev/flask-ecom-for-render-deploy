@@ -9,6 +9,7 @@ from helpers import apology, usd
 
 app = Flask(__name__)
 db = SQL("sqlite:///database.db")
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 app.jinja_env.filters["usd"] = usd
 
@@ -407,9 +408,4 @@ def register():
 if __name__ == '__main__':
     # Use the PORT environment variable if available, otherwise default to 5000
     port = int(os.environ.get('PORT', 5000))
-    app.secret_key = 'super secret key'
-    app.config['SESSION_TYPE'] = 'filesystem'
-    SECRET_KEY = "super secret key"
-    app.debug = True
-    app.run()
     app.run(host='0.0.0.0', port=port, debug=False)
