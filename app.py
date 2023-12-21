@@ -297,7 +297,6 @@ def product_list():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
-    session.clear()
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
         # Ensure username was submitted
@@ -342,7 +341,6 @@ def logout():
         db.execute("DELETE FROM Basket WHERE UserID = ?", id_return)
 
     # Forget any user_id
-    session.clear()
 
     # Redirect user to login form
     return redirect("/")
@@ -351,7 +349,6 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    session.clear()
 
     if request.method == "POST":
         # check username length
