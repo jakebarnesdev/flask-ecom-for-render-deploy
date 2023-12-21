@@ -1,28 +1,16 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, send_from_directory, url_for
 import os
 from cs50 import SQL
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
-from helpers import apology, usd
-db = SQL("sqlite:///database.db")
+from helpers import apology, login_required, lookup, usd
 
 app = Flask(__name__)
-PERMANENT_SESSION_LIFETIME = 1800
-
-app.config.update(SECRET_KEY=os.urandom(24))
-
-app.config.from_object(__name__)
-Session(app)
-
-if __name__ == "__main__":
-    with app.test_request_context("/"):
-        session["key"] = "value"
-
-app.jinja_env.filters["usd"] = usd
-
-Session(app)
+db = SQL("sqlite:///database.db")
+app.secret_key = 'your_secret_key_here'
+app.secret_key = os.urandom(24)
 
 @app.route('/')
 def index():
@@ -145,7 +133,7 @@ def checkout():
 
 @app.route('/basket')
 def basket():
-    # session['return_page'] = '/basket'
+    session['return_page'] = '/basket'
     # check if logged in by checking session
     if 'user_id' not in session:
         # redirect to the login page
@@ -270,7 +258,7 @@ def product_render(design):
 @app.route('/product_list', methods=['GET', 'POST'])
 def product_list():
     # store page in session
-    # session['return_page'] = '/product_list'
+    session['return_page'] = '/product_list'
 
     # query for every design
     products = db.execute("SELECT * FROM stock WHERE Design IS NOT NULL")
@@ -306,6 +294,7 @@ def product_list():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
+    session.clear()
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
         # Ensure username was submitted
@@ -350,6 +339,7 @@ def logout():
         db.execute("DELETE FROM Basket WHERE UserID = ?", id_return)
 
     # Forget any user_id
+    session.clear()
 
     # Redirect user to login form
     return redirect("/")
@@ -358,6 +348,7 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
+    session.clear()
 
     if request.method == "POST":
         # check username length
