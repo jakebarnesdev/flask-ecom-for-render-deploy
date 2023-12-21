@@ -1,16 +1,21 @@
-from flask import Flask, render_template, request, send_from_directory, url_for
+from flask import Flask, render_template, request, url_for
 import os
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
-from helpers import apology, login_required, lookup, usd
+from helpers import apology, usd
 
 app = Flask(__name__)
 db = SQL("sqlite:///database.db")
-app.secret_key = 'your_secret_key_here'
-app.secret_key = os.urandom(24)
+
+# Check if the app is running in a production environment
+if os.environ.get("FLASK_ENV") == "production":
+    app.secret_key = os.environ.get("SECRET_KEY")
+else:
+    # If running in a development environment, use a random secret key
+    app.secret_key = os.urandom(24)
 
 app.jinja_env.filters["usd"] = usd
 
