@@ -1,0 +1,17 @@
+.info-footer {
+  width: 100%;
+  height: 100%;
+}
+
+.footer-boxes {
+  display: flex;
+}
+
+.footer-box {
+  padding-left: 4rem;
+  width: 420px;
+}
+
+.footer {
+  margin-top: auto;
+}

@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% set include_navbar = true %}
+{% set include_footer = true %}
+{% block top %}
+    <header class="prenavbar">
+        <a href="{{ url_for('product_render', design='birthdayshirt') }}">
+            &#9880;&#9880; Come check out something special we have
+            &#9880;&#9880;
+        </a>
+    </header>
+{% endblock %}
+{% block main %}
+    <div class="index">
+            <div class="logos">
+                <div class="logo hidden">
+                    <img class="showcase-image" src="{{ url_for('static', filename='images/showcase1.jpg') }}" alt="">                        
+                </div>
+                <div class="logo hidden">
+                    <img class="showcase-image" src="{{ url_for('static', filename='images/showcase2.jpg') }}" alt="">
+                </div>
+            </div>
+            <div class="logos">
+                <div class="logo hidden">
+                    <img class="showcase-image" src="{{ url_for('static', filename='images/showcase1.jpg') }}" alt="">                        
+                </div>
+                <div class="logo hidden">
+                    <img class="showcase-image" src="{{ url_for('static', filename='images/showcase2.jpg') }}" alt="">
+                </div>
+            </div>
+            <div class="showcase">
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="category-showcase">
+                <h3 class="index-h3">Shirts for any occasion</h3>
+                <br>
+                <a class="width" href="/product_list?category=Business">
+                    <p class="">Business</p>
+                    <img class="height" src="{{ url_for('static', filename='images/buisness.jpg') }}" alt="Business" class="occasion">
+                </a>
+                <br>
+                <br>
+                <br>
+                <a class="width" href="/product_list?category=Casual">
+                    <p class="">Casual</p>
+                    <img class="height" src="{{ url_for('static', filename='images/casual.jpg') }}" alt="Casual" class="occasion">
+                </a>
+                <br>
+                <br>
+                <br>
+                <a class="width" href="/product_list?category=Novelty">
+                    <p class="">Novelty</p>
+                    <img class="height" src="{{ url_for('static', filename='images/novelty.jpg') }}" alt="Novelty" class="occasion">
+                </a>
+            </div>
+    </div>
+    <br>
+    <div class="flex">
+        {% for item in random_designs %}
+        <a class="text-width" href="{{ url_for('product_render', design=item['Design']) }}">
+            <p>{{  item['Design'] }} </p>
+            <img class="img-width" src="{{ url_for('static', filename='images/' + item['ImageCode'] + '.jpg') }}" alt="{{ item.Design }}">
+        </a>
+        {% endfor %}
+        {% if not session["user_id"] %}
+        <p class="greeting">
+            register or login to get going
+        </p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+    Product Render
+{% endblock %} 
+
+{% set include_navbar = true %}
+{% set include_footer = true %}
+
+{% block main %}
+
+<a href="/product_list" class="top">Back to products</a>
+
+<form action="/add_to_basket" method="post" class="product-form">
+    <div class="top">
+        <ul class="product-details">
+            <li>
+                <br>
+                {% if design == 'birthdayshirt' %}
+                <p>A shirt perfect for a birthday!</p><br>
+                {% endif %}
+                <div class="wrap">
+                    <img class="product-image" src="{{ url_for('static', filename='images/' + product[0]['ImageCode'] + '.jpg') }}" alt=""><br>
+                    <div class="wrap-down">
+                        <div class="wrap-text topper">
+                            <strong>Design: &nbsp; </strong> {{ product[0]['Design'] }}<br>
+                        </div>
+                        <div class="wrap-text">
+                            <strong>Type: &nbsp; </strong> {{ product[0]['Type'] }}<br>
+                        </div>
+                        <div class="wrap-text">
+                            <strong>Size: &nbsp; </strong> {{ product[0]['Size'] }}<br>
+                        </div>
+                        <div class="wrap-text">
+                            <strong>Color: &nbsp; </strong> {{ product[0]['Color'] }}<br>
+                        </div>
+                        <div class="wrap-text">
+                            <strong>Style: &nbsp; </strong> {{ product[0]['Style'] }}<br>
+                        </div>
+                        <div class="wrap-text">
+                            <strong>Price: &nbsp; </strong> {{ product[0]['Price'] | usd }}<br>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <input type="hidden" name="product_id" value="{{ product[0]['ID'] }}">
+        {% if in_stock %}
+        <div class="quantity-input">
+            <input type="number" name="quantity" value="1" min="1">
+            <button type="submit" class="add-to-basket">Add to basket</button>
+            {% if stock_left < 11 %}
+                <p >Only {{ stock_left }} left in stock!</p>
+            {% endif %}
+        </div>
+        {% else %}
+            <p >Out of stock</p>
+        {% endif %}
+    </div>
+</form>
+{% endblock %}

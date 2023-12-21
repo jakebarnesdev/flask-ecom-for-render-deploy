@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+    Product List 
+{% endblock %} 
+
+{% set include_navbar = true %}
+{% set include_footer = true %}
+
+{% block main %}
+<div class="content-container">
+    <h1 class="product-list-title">Product List</h1>
+    <div class="product-containers">
+        <div class="filters">
+            <p class="filter-title">&nbsp; Filters</p>
+            <div class="input-group">
+                <form id="search-form" method="POST" action="{{ url_for('product_list') }}">
+                    <div class="pad">
+                        <div class="plus-tag">
+                            <label for="price-range">Filter Price</label>
+                            <div id="hamburger-icon">+</div>
+                        </div>
+                        <div id="dropdown-content" class="show-hide-menu">
+                            <div class="price">
+                                <div>$</div>
+                                <input type="text" class="price-range" id="price-min" name="min_price" value="150" oninput="updateRange()">
+                            </div>
+                            <input type="range" id="price-range" name="price" min="0" max="150" step="1" value="150" oninput="updateText()">
+                        </div>
+                    </div>
+                    <div class="pad">
+                        <div class="plus-tag">
+                            <label for="style-dropdown">Filter Style</label>
+                        </div>
+                        <div id="style-dropdown-content" class="show-hide-menu">
+                            <input class="hidden2" id="selected-category" name="category" value="">
+                            <div class="clickable-box pad" onclick="selectCategory('Business')">Business</div>
+                            <div class="clickable-box pad" onclick="selectCategory('Casual')">Casual</div>
+                            <div class="clickable-box pad" onclick="selectCategory('Novelty')">Novelty</div>
+                            <div class="pad">
+                                <button type="submit">Search</button>
+                                <button type="button" onclick="resetForm()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="product-list-div">
+            {% set unique_designs = [] %}
+            {% if products %}
+                <ul class="product-div">
+                    {% for item in products %}
+                        {% if item['Design'] not in unique_designs %}
+                            <a href="{{ url_for('item_render', design=item['Design']) }}" class="product-link">
+                                <div class="each-product">
+                                    <div class="cashtop">
+                                        <p>{{ item['Design'] }}</p>
+                                        {% if item['Quantity'] >= 1 %}
+                                            <p class="in-stock">&nbsp;- In stock</p>
+                                        {% else %}
+                                            <p class="in-stock">&nbsp;- Out of stock</p>
+                                        {% endif %}
+                                    </div>
+                                    {% if item['NewIn'] == 1 %}
+                                        <p class="new-in">New In</p>
+                                    {% else %}
+                                        <p class="new-in">&nbsp;</p>
+                                    {% endif %}
+                                    <div class="container">
+                                        <img class="product-image" src="{{ url_for('static', filename='images/' + item['ImageCode'] + '.jpg') }}" alt="{{ item.Design }}">
+                                        <img class="overlay" src="{{ url_for('static', filename='images/' + item['ImageCode'] + '2.jpg') }}" alt="{{ item.Design }}">
+                                    </div>
+                                    <p>${{ item['Price'] | usd}}</p>
+                                </div>
+                                {% set _ = unique_designs.append(product['Design']) %}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="product-list-title no-product">No products available</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

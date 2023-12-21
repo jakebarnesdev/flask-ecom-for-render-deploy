@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+    Purchase History 
+{% endblock %} 
+
+{% set include_navbar = true %}
+{% set include_footer = true %}
+
+{% block main %}
+<br><br><br>
+<div>
+    <div class="box">
+        Hi, {{ username[0]['username'] }}
+    </div>
+    <h1>Purchase History</h1>
+    {% for group in grouped_result | reverse %}
+        <h2>{{ group['PurchaseDate'] }}</h2>
+        <table class="purchase-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Size</th>
+                    <th>Color</th>
+                    <th>Price</th>
+                    <th>Design</th>
+                    <th>Quantity</th>
+                    <th>Total Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in group['GroupedEntries'] %}
+                    <tr>
+                        <td>{{ item['Type'] }}</td>
+                        <td>{{ item['Size'] }}</td>
+                        <td>{{ item['Color'] }}</td>
+                        <td>{{ item['Price'] | usd }}</td>
+                        <td>{{ item['Design'] }}</td>
+                        <td>{{ item['Quantity'] }}</td>
+                        <td>{{ item['TotalAmount'] | usd }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="total">Total Purchase: {{ group['TotalAmountSum'] | usd }}</p>
+    {% endfor %}
+</div>
+{% endblock %}

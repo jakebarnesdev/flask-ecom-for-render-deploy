@@ -1,0 +1,20 @@
+.box {
+  padding-top: 20px;
+}
+
+.purchase-table {
+  margin-top: 20px;
+}
+
+.purchase-table th,
+.purchase-table td {
+  border: 1px solid #f3f3f3;
+  padding: 10px;
+  text-align: left;
+}
+
+.total {
+  padding-top: 5px;
+  padding-bottom: 25px;
+  font-weight: bold;
+}

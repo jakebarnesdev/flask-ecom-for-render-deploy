@@ -1,0 +1,19 @@
+.prenavbar {
+  background-color: #e0e0e0;
+  font-weight: 100;
+  display: flex;
+  font-size: 1rem;
+  justify-content: center;
+  padding: 0.3rem;
+  transition: background-color ease-in-out 0.2s;
+  z-index: 100;
+}
+
+.prenavbar a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.prenavbar:hover {
+  background-color: rgba(27, 27, 27, 0.711);
+}

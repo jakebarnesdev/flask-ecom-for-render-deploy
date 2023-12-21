@@ -1,0 +1,49 @@
+.back-link {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.product-form {
+  margin-top: 20px;
+}
+
+.product-details {
+  list-style-type: none;
+}
+
+.product-image {
+  max-width: 200px;
+  height: auto;
+}
+
+.quantity-input {
+  margin-left: 75px;
+}
+
+.add-to-basket {
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+.wrap-text {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.topper {
+  margin-top: 15px;
+}
+
+.wrap-down {
+  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Barno Corp T-shirts: {% block title %}{% endblock %}</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='account.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='footer.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='prenavbar.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='product_list.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='product_render.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='scroll.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='basket.css') }}"/>
+</head>
+<body>
+    {% block top %}     {% endblock %}
+
+    {% if include_navbar %}
+        <header class="navbar">
+            {% include 'navbar.html' %}
+        </header>
+    {% endif %}
+    
+    {% block main %} {% endblock %}
+    <div class="footer">
+        {% if include_footer %}
+            <footer>
+                {% include 'footer.html' %}
+            </footer>
+        {% endif %}
+        <div class="trademark">
+            <p>Built by JBDev</p>
+        </div>
+    </div>
+        <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+        <script src="{{ url_for('static', filename='productlist.js') }}"></script>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

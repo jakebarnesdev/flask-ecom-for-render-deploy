@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+    Basket 
+{% endblock %} 
+
+{% set include_navbar = true %}
+{% set include_footer = true %}
+
+{% block main %}
+<div class="basket-container top">
+    <a class="top" href="/product_list">Back to products</a>
+    <br> <p>Basket</p>
+    <h1>Your Basket</h1>
+    {% if basket_items %}
+        {% for item in basket_items %}
+            <strong> {{ item['Design'] }}</strong><br>
+            <strong>Size:</strong> {{ item['Size'] }}<br>
+            <strong>Color:</strong> {{ item['Color'] }}<br>
+            <strong>Quantity:</strong> {{ item['QuantityBuying'] }}<br>
+            <strong>Price:</strong> {{ item['Price'] | usd }}<br>
+            <img class="product-image" src="{{ url_for('static', filename='images/' + item['ImageCode'] + '.jpg') }}" alt="{{ item.Design }}">
+            <form action="{{ url_for('remove_item', item_id=item['ID']) }}" method="post">
+                <label for="quantity">Quantity to Remove:</label>
+                <input type="number" name="quantity" value="1" min="1" max="{{ item['QuantityBuying'] }}">
+                <button type="submit">Remove</button>
+            </form>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>Your basket is empty.</p>
+    {% endif %}
+    {% if basket_items %}
+        <p>total price: {{total_price | usd}}</p>
+        <a href="/checkout">Checkout</a>
+    {% endif %}
+</div>
+{% endblock %}

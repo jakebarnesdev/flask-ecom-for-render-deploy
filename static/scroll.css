@@ -1,0 +1,37 @@
+.hidden {
+  z-index: -1;
+  opacity: 0;
+  filter: blur(5px);
+  transition: blur 0.5s;
+  transition: opacity 1s;
+}
+
+.show {
+  filter: blur(0);
+  opacity: 1;
+}
+
+.logos {
+  display: flex;
+  margin-top: 200px;
+  transition: all 1s;
+}
+
+.logo:nth-child(2) {
+  transition-delay: 100ms;
+}
+
+.logo:nth-child(3) {
+  transition-delay: 200ms;
+  margin-right: 300px;
+}
+
+.showcase-image {
+  margin-left: 1px;
+  padding-left: 0;
+  height: 250px;
+}
+
+.index-h3 {
+  font-size: 50px;
+}

@@ -1,0 +1,47 @@
+<div class="wrappers">
+    <nav class="main">
+    <ul class="ul-class">
+        <div class="left">
+        <li class="dropdown">
+            <button id="menu-toggle" class="button-class">Shop ⮟</button>
+            <ul class="dropdown-menu ul-class">
+                <li><a href="{{ url_for('product_list', category='Business') }}">Business</a></li>
+                <li><a href="{{ url_for('product_list', category='Casual') }}">Casual</a></li>
+                <li><a href="{{ url_for('product_list', category='Novelty') }}">Novelty</a></li>
+                <li><a href="{{ url_for('product_list') }}">All Products</a></li>
+            </ul>
+        </li>
+        <li></li>
+        <li class="dropdown">
+            <button id="menu-toggle" class="button-class">About ⮟</button>
+            <ul class="dropdown-menu ul-class">
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/about">Sustainablity</a></li>
+            <li><a href="/about">FAQ's</a></li>
+            </ul>
+        </li>
+        </div>
+        <a href="/" class="logo">Barno Corp T-shirts</a>
+        <div class="right">
+        {% if not session["user_id"] %}
+        <li>
+            <a href="/login">Login</a>
+        </li>
+        <li>
+            <a href="/register">Register</a>
+        </li>
+        {% else %}
+        <li>
+            <a href="/logout">Logout</a>
+        </li>
+        <li>
+            <a href="/basket">Basket</a>
+        </li>
+        <li>
+            <a href="/account">Account</a>
+        </li>
+        {% endif %}
+        </div>
+    </ul>
+    </nav>
+</div>

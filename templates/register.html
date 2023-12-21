@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %} 
+    Register 
+{% endblock %} 
+
+{% set include_navbar = true %}
+{% set include_footer = true %}
+
+{% block main %}
+<br>
+<br>
+<br>
+<br>
+<form action="{{ url_for('register') }}" method="post" class="accounts-div">
+    <div class="mb-3">
+        <input autocomplete="off" autofocus id="username" name="username" placeholder="Username" type="text"/>
+        <div id="error-message" class="error-message" style="display: none">
+        Username must have at least 4 characters
+        </div>
+    </div>
+    <div class="mb-3">
+        <input id="password" name="password" placeholder="Password" type="password"/> <div id="password-strength"></div>
+    </div>
+    <div class="mb-3">
+        <input id="confirmation" name="confirmation" placeholder="confirm password" type="password"/> <div id="confirmation-error" class="error-message" style="display: none">Password does not match</div>
+    </div>
+    <button type="submit">Register</button>
+</form>
+{% endblock %}
