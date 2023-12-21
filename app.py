@@ -12,6 +12,8 @@ db = SQL("sqlite:///database.db")
 app.secret_key = 'your_secret_key_here'
 app.secret_key = os.urandom(24)
 
+app.jinja_env.filters["usd"] = usd
+
 @app.route('/')
 def index():
     # query for 3 random shirts that are not repeat designs
